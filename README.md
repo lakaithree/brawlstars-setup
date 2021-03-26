@@ -1,1 +1,1 @@
-# brawlstars-setup
+#Конфигурация BrawlStars
