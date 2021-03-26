@@ -1,0 +1,330 @@
+items:
+
+  hub:
+    icon: barrier
+    text: '§cВыход'
+
+  navigator:
+    icon: clay_ball
+    nbt: {brawl: bwstar}
+    text: '§eНавигатор по Бравл Тауну'
+
+  brawler:
+    text: |
+      &e&l<name>
+      ¨c9c0bb<type>
+
+        &fРедкость: <rarity>
+        &aУровень:&f <level>
+        &dУровень силы: &f<power-points> 
+        &eТрофеев: &f<rating> 
+
+  click:
+    text: |
+    
+      &e▶ Нажмите¨ffffb8 ЛКМ&e, чтобы выбрать бравлера &f
+      &e▶ Нажмите¨ffffb8 ПКМ&e, чтобы посмотреть¨b2ec5d улучшить§e за&d <next-level>&f 
+
+  available:
+    text: |
+
+      &e▶ Нажмите, чтобы посмотреть
+
+  back-main:
+    text: |
+
+      &e▶ Вернуться в главное меню
+
+  back:
+    text: |
+
+      &e▶ Вернуться назад
+
+  unavailable:
+    icon: clay_ball
+    nbt:
+      other: tochka
+    text: '&7???'
+
+  
+  header:
+    icon: stained_glass_pane
+    text: ''
+
+  empty:
+    icon: stained_glass_pane
+    data: 8
+    text: ''
+
+  bonus:
+    icon: clay_ball
+    nbt: {brawl: bonus}
+    text: |
+      &aУсилитель
+
+      Каждый усилитель даёт тебе
+      &a+10%&f к твоему урону и
+      &c+1❤&f к твоему здоровью 
+
+  crystal:
+    icon: quartz
+    nbt:
+      color: 0x_ff7fff
+    text: |
+      &dМагический кристалл
+
+      Соберите &d10 кристаллов&f, чтобы победить
+
+  # Шестерёнка
+  gear: 
+    icon: clay_ball
+    nbt: {other: settings}
+
+  # Чемодан
+  suitcase: 
+    icon: clay_ball
+    nbt: {other: guild_shop}
+
+  # Свиток
+  scroll: 
+    icon: clay_ball
+    nbt: {other: quests}
+
+  # Банк
+  bank: 
+    icon: clay_ball
+    nbt: {other: guild_bank}
+
+
+  # Кнопочки в менюшках
+  btn-options:
+    icon: gear
+    text: |
+      䀦 &eНастройки
+      Хочешь упростить себе 
+      времяпровождение в игре? 
+      Настрой себе профиль и
+      наслаждайся игрой!
+
+  btn-fabrica:
+    icon: suitcase
+    text: |
+      㧩&e&l Экономика
+      Информация о ваших средствах и доходах
+      Самый настоящий кабинет аналитика!
+
+  btn-subworlds:
+    icon: grass
+    text: |
+      㕊&e&l Путешествия
+      В мире много мест помимо Бравлтауна!
+      Играй и развивайся за пределами родного городка!
+
+  btn-stats:
+    icon: scroll
+    text: |
+      㨉&e&l Статистика
+      Так долго играешь, что
+      готов похвастаться своей
+      статистикой? Тут ты 
+      можешь посмотреть свою 
+      статистику за всё время!
+
+
+
+  btn-donate:
+    icon: bank
+    text: |
+      㙿 &e&lДонат
+      Хочешь развиться чуть быстрее,
+      чем остальные? Или же 
+      купить какой-то скин на твоего
+      Бравлера... Всё это ты можешь
+      приобрести в данном разделе!
+
+
+  btn-brawler:
+    icon: brawler
+    text: |
+
+      &e▶ Нажмите ЛКМ, чтобы 
+        &eпревратиться в этого бравлера
+      &e▶ Нажмите ПКМ, чтобы
+        &eвыбрать скин этому бравлеру
+
+
+  tool:
+    flags: ['*']
+    text: |
+      <title> &7(¨¨ffc966Уровень <level>&7)
+
+      &eСтатистика предмета:
+      &7▶¨ffc966 Блоков добыто: &f<stat>
+      &7▶¨ffc966 До следующего уровня: &f<required>
+      &f
+    unbreakable: true
+
+  sword:
+    flags: ['*']
+    unbreakable: true
+
+    text: |
+      <title> &7(¨¨ffc966Уровень <level>&7)
+
+      &eСтатистика предмета:
+      &7▶¨ffc966 Убито мобов: &f<stat>
+      &7▶¨ffc966 До следующего уровня: &f<required>
+      &f
+      ¨c9c0bbПрокачивай меч, убивая мобов!
+      ¨c9c0bbИспользуй его против игроков на мини-играх! 
+
+      &eИспользуется для:
+      &7▶¨c9c0bb Убийства Мобов
+      &7▶¨c9c0bb Добычи Паутины 
+
+    nbt:
+      CanDestroy:
+        - minecraft:web
+
+  pickaxe:
+    icon: tool
+    text: |
+      ¨c9c0bbПрокачивай кирку, добывая руду!
+      ¨c9c0bbКаждый новый уровень делает кирку быстрее!
+
+      &eИспользуется для разрушения:
+      &7▶¨c9c0bb Всевозможных Руд
+      &7▶¨c9c0bb Редкого Камня 
+      &7▶¨c9c0bb Загрязнений с Булыжника
+    nbt:
+      CanDestroy:
+        - minecraft:iron_ore
+        - minecraft:coal_ore
+        - minecraft:diamond_ore
+        - minecraft:emerald_ore
+        - minecraft:lapis_ore
+        - minecraft:redstone_ore
+        - minecraft:gold_ore
+        
+
+  shovel:
+    icon: tool
+    text: |
+      ¨c9c0bbПрокачивай лопату, добывая глину и растительность!
+      ¨c9c0bbКаждый новый уровень делает лопату быстрее!
+
+      &eИспользуется для разрушения:
+      &7▶¨c9c0bb Мокрой Глины &e(Затерянный Остров)
+      &7▶¨c9c0bb Пшеницы и прочих посевов 
+    nbt:
+      CanDestroy:
+        - minecraft:wheat
+
+  axe:
+    icon: tool
+    text: |
+      ¨c9c0bbПрокачивай топор, добывая кактусы!
+      ¨c9c0bbКаждый новый уровень делает топор быстрее!
+
+      &eИспользуется для разрушения:
+      &7▶¨c9c0bb Кактусы
+      &7▶¨c9c0bb Магическое Древо &d(Пурпурный Лес)
+    nbt:
+      CanDestroy:
+        - minecraft:melon_block
+        - minecraft:chest
+
+  sword-0:  {icon: sword wood-sword}
+  sword-1:  {icon: sword-0, enchant: [16-1]}
+  sword-2:  {icon: sword-0, enchant: [16-2]}
+  sword-3:  {icon: sword stone-sword}
+  sword-4:  {icon: sword-3, enchant: [16-1]}
+  sword-5:  {icon: sword-3, enchant: [16-2]}
+  sword-6:  {icon: sword iron-sword}
+  sword-7:  {icon: sword-6, enchant: [16-1]}
+  sword-8:  {icon: sword-6, enchant: [16-2]}
+  sword-9:  {icon: sword-6, enchant: [16-3]}
+  sword-10: {icon: sword-6, enchant: [16-4]}
+  sword-11: {icon: sword-6, enchant: [16-5]}
+  sword-12: {icon: sword-6, enchant: [16-6]}
+  sword-13: {icon: sword-6, enchant: [16-7]}
+  sword-14: {icon: sword-6, enchant: [16-8]}
+  sword-15: {icon: sword-6, enchant: [16-9]}
+  sword-16: {icon: sword-6, enchant: [16-10]}
+  sword-17: {icon: sword-6, enchant: [16-11]}
+  sword-18: {icon: sword-6, enchant: [16-12]}
+  sword-19: {icon: sword-6, enchant: [16-13]}
+
+  pickaxe-0:  {icon: pickaxe wood-pickaxe}
+  pickaxe-1:  {icon: pickaxe-0, enchant: [32-1]}
+  pickaxe-2:  {icon: pickaxe-0, enchant: [32-2]}
+  pickaxe-3:  {icon: pickaxe stone-pickaxe}
+  pickaxe-4:  {icon: pickaxe-3, enchant: [32-1]}
+  pickaxe-5:  {icon: pickaxe-3, enchant: [32-2]}
+  pickaxe-6:  {icon: pickaxe iron-pickaxe}
+  pickaxe-7:  {icon: pickaxe-6, enchant: [32-1]}
+  pickaxe-8:  {icon: pickaxe-6, enchant: [32-2]}
+  pickaxe-9:  {icon: pickaxe-6, enchant: [32-3]}
+  pickaxe-10: {icon: pickaxe-6, enchant: [32-4]}
+  pickaxe-11: {icon: pickaxe-6, enchant: [32-5]}
+  pickaxe-12: {icon: pickaxe-6, enchant: [32-6]}
+  pickaxe-13: {icon: pickaxe-6, enchant: [32-7]}
+  pickaxe-14: {icon: pickaxe-6, enchant: [32-8]}
+  pickaxe-15: {icon: pickaxe-6, enchant: [32-9]}
+  pickaxe-16: {icon: pickaxe-6, enchant: [32-10]}
+  pickaxe-17: {icon: pickaxe-6, enchant: [32-11]}
+  pickaxe-18: {icon: pickaxe-6, enchant: [32-12]}
+  pickaxe-19: {icon: pickaxe-6, enchant: [32-13]}
+
+  shovel-0:  {icon: shovel wood-spade}
+  shovel-1:  {icon: shovel-0, enchant: [32-1]}
+  shovel-2:  {icon: shovel-0, enchant: [32-2]}
+  shovel-3:  {icon: shovel stone-spade}
+  shovel-4:  {icon: shovel-3, enchant: [32-1]}
+  shovel-5:  {icon: shovel-3, enchant: [32-2]}
+  shovel-6:  {icon: shovel iron-spade}
+  shovel-7:  {icon: shovel-6, enchant: [32-1]}
+  shovel-8:  {icon: shovel-6, enchant: [32-2]}
+  shovel-9:  {icon: shovel-6, enchant: [32-3]}
+  shovel-10: {icon: shovel-6, enchant: [32-4]}
+  shovel-11: {icon: shovel-6, enchant: [32-5]}
+  shovel-12: {icon: shovel-6, enchant: [32-6]}
+  shovel-13: {icon: shovel-6, enchant: [32-7]}
+  shovel-14: {icon: shovel-6, enchant: [32-8]}
+  shovel-15: {icon: shovel-6, enchant: [32-9]}
+  shovel-16: {icon: shovel-6, enchant: [32-10]}
+  shovel-17: {icon: shovel-6, enchant: [32-11]}
+  shovel-18: {icon: shovel-6, enchant: [32-12]}
+  shovel-19: {icon: shovel-6, enchant: [32-13]}
+
+  axe-0:  {icon: axe wood-axe}
+  axe-1:  {icon: axe-0, enchant: [32-1]}
+  axe-2:  {icon: axe-0, enchant: [32-2]}
+  axe-3:  {icon: axe stone-axe}
+  axe-4:  {icon: axe-3, enchant: [32-1]}
+  axe-5:  {icon: axe-3, enchant: [32-2]}
+  axe-6:  {icon: axe iron-axe}
+  axe-7:  {icon: axe-6, enchant: [32-1]}
+  axe-8:  {icon: axe-6, enchant: [32-2]}
+  axe-9:  {icon: axe-6, enchant: [32-3]}
+  axe-10: {icon: axe-6, enchant: [32-4]}
+  axe-11: {icon: axe-6, enchant: [32-5]}
+  axe-12: {icon: axe-6, enchant: [32-6]}
+  axe-13: {icon: axe-6, enchant: [32-7]}
+  axe-14: {icon: axe-6, enchant: [32-8]}
+  axe-15: {icon: axe-6, enchant: [32-9]}
+  axe-16: {icon: axe-6, enchant: [32-10]}
+  axe-17: {icon: axe-6, enchant: [32-11]}
+  axe-18: {icon: axe-6, enchant: [32-12]}
+  axe-19: {icon: axe-6, enchant: [32-13]}
+
+    
+  gadget:
+    icon: feather
+    text: |
+      &aГаджет&8 | &f<name>
+
+
+
+
+

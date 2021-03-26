@@ -1,0 +1,323 @@
+$ccolored-particle: &ccolor-particle
+  type: particle
+  amount: 0
+  speed: 0
+
+$cdust-particle: &cparticle-dust
+  <<: *ccolor-particle
+  id: redstone
+
+
+crateManager:
+
+  types:
+  - address: normal
+
+    priceType: red-tokens
+    priceAmount: 25
+    material: LIGHT_BLUE_SHULKER_BOX
+
+    openSparkles:
+      - {type: particle, id: totem, amount: 10, speed: 0.2}
+      - {type: sound, id: block-chest-open, volume: 1}
+
+    contents:
+
+      - type: power
+        amount: {from: 10, to: 40}
+        iterations: {from: 1, to: 3}
+        showSparkles:
+          - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+          - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}
+        tickSparkles:
+          #- {type: particle, id: portal, amount: 4, speed: 1}
+          - {type: particle, id: fireworks-spark, amount: 2}
+        item:
+          icon: chorus-plant
+          text: Очки силы §dx<amount>§f для §e<brawler>
+
+      - type: stat
+        stat: red-tokens
+        amount: {from: 1, to: 3}
+        showSparkles:
+          - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+          - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}
+          - {type: armor-stand, lifetime: 0.5s, amount: 15, motion: 1, scatter: 360} 
+        tickSparkles:
+          - {type: particle, id: fireworks-spark, speed: 0, amount: 2}
+          #- {<<: *cparticle-dust, offset: 0.9 0.1 0.1, amount: 5}
+        item:
+          icon: beetroot
+          text: §cКрасные жетоны
+
+      - type: brawler
+        rarity: COMMON
+        chance: 10%
+        showSparkles:
+        - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+        - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}
+        - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 1, pitch: 2}
+        tickSparkles:
+        - {type: particle, id: fireworks-spark, speed: 0, amount: 2}
+        #- {<<: *cparticle-dust, offset: 0.1 0.8 0.9, amount: 5}
+
+      - type: brawler
+        rarity: RARE
+        chance: 2%
+        showSparkles:
+        - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}  
+        - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+        - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 1, pitch: 1.5}
+        tickSparkles:
+        - {type: particle, id: fireworks-spark, speed: 0, amount: 2}
+        #- {<<: *cparticle-dust, offset: 0.1 0.8 0.2, amount: 5}
+
+      - type: brawler
+        rarity: SUPERRARE
+        chance: 1%
+        showSparkles:
+        - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+        - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}
+        - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 1, pitch: 1}
+        tickSparkles:
+        - {type: particle, id: fireworks-spark, speed: 0, amount: 2}
+        #- {<<: *cparticle-dust, offset: 0.1 0.4 0.9, amount: 5}
+
+  - address: big
+
+    priceType: red-tokens
+    priceAmount: 75
+    material: ORANGE_SHULKER_BOX
+
+    openSparkles:
+      - {type: particle, id: totem, amount: 10, speed: 0.2}
+      - {type: sound, id: block-chest-open, volume: 1}
+      
+    contents:
+
+      - type: power
+        amount: {from: 10, to: 40}
+        iterations: {from: 0, to: 4}
+        showSparkles:
+          - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+          - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}
+        tickSparkles:
+          #- {type: particle, id: portal, amount: 4, speed: 1}
+          - {type: particle, id: fireworks-spark, amount: 2}
+        item:
+          icon: chorus-plant
+          text: Очки силы §dx<amount>§f для §e<brawler>
+
+      - type: stat
+        stat: red-tokens
+        amount: {from: 1, to: 10}
+        showSparkles:
+          - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+          - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}
+          - {type: armor-stand, lifetime: 0.5s, amount: 15, motion: 1, scatter: 360} 
+        tickSparkles:
+          - {type: particle, id: fireworks-spark, speed: 0, amount: 2}
+          #- {<<: *cparticle-dust, offset: 0.9 0.1 0.1, amount: 5}
+        item:
+          icon: beetroot
+          text: §cКрасные жетоны
+
+      - type: brawler
+        rarity: COMMON
+        chance: 10%
+        showSparkles:
+        - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+        - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}
+        - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 1, pitch: 2}
+        tickSparkles:
+        - {type: particle, id: fireworks-spark, speed: 0, amount: 2}
+        #- {<<: *cparticle-dust, offset: 0.1 0.8 0.9, amount: 5}
+
+      - type: brawler
+        rarity: RARE
+        chance: 5%
+        showSparkles:
+        - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}  
+        - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+        - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 1, pitch: 1.5}
+        tickSparkles:
+        - {type: particle, id: fireworks-spark, speed: 0, amount: 2}
+        #- {<<: *cparticle-dust, offset: 0.1 0.8 0.2, amount: 5}
+
+      - type: brawler
+        rarity: SUPERRARE
+        chance: 5%
+        showSparkles:
+        - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+        - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}
+        - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 1, pitch: 1}
+        tickSparkles:
+        - {type: particle, id: fireworks-spark, speed: 0, amount: 2}
+        #- {<<: *cparticle-dust, offset: 0.1 0.4 0.9, amount: 5}
+
+
+      - type: brawler
+        rarity: EPIC
+        chance: 5%
+        showSparkles:
+        - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+        - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}
+        - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 1, pitch: 1}
+        tickSparkles:
+        - {type: particle, id: fireworks-spark, speed: 0, amount: 2}
+        #- {<<: *cparticle-dust, offset: 0.1 0.4 0.9, amount: 5}
+
+  - address: mega
+
+    priceType: red-tokens
+    priceAmount: 200
+    material: YELLOW_SHULKER_BOX
+
+    openSparkles:
+      - {type: particle, id: totem, amount: 10, speed: 0.2}
+      - {type: sound, id: block-chest-open, volume: 1}
+      
+    contents:
+
+      - type: power
+        amount: {from: 20, to: 100}
+        iterations: {from: 3, to: 5}
+        showSparkles:
+          - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+          - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}
+        tickSparkles:
+          #- {type: particle, id: portal, amount: 4, speed: 1}
+          - {type: particle, id: fireworks-spark, amount: 2}
+        item:
+          icon: chorus-plant
+          text: Очки силы §dx<amount>§f для §e<brawler>
+
+      - type: stat
+        stat: red-tokens
+        amount: {from: 1, to: 20}
+        showSparkles:
+          - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+          - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}
+          - {type: armor-stand, lifetime: 0.5s, amount: 15, motion: 1, scatter: 360} 
+        tickSparkles:
+          - {type: particle, id: fireworks-spark, speed: 0, amount: 2}
+          #- {<<: *cparticle-dust, offset: 0.9 0.1 0.1, amount: 5}
+        item:
+          icon: beetroot
+          text: §cКрасные жетоны
+
+      - type: brawler
+        rarity: EPIC
+        chance: 10%
+        showSparkles:
+        - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+        - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}
+        - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 1, pitch: 2}
+        tickSparkles:
+        - {type: particle, id: fireworks-spark, speed: 0, amount: 2}
+        #- {<<: *cparticle-dust, offset: 0.1 0.8 0.9, amount: 5}
+
+      - type: brawler
+        rarity: MYTHIC 
+        chance: 7%
+        showSparkles:
+        - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}  
+        - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+        - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 1, pitch: 1.5}
+        tickSparkles:
+        - {type: particle, id: fireworks-spark, speed: 0, amount: 2}
+        #- {<<: *cparticle-dust, offset: 0.1 0.8 0.2, amount: 5}
+
+      - type: brawler
+        rarity: LEGENDARY
+        chance: 5%
+        showSparkles:
+        - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1, pitch: 1.5}
+        - {type: sound, id: ENTITY_ENDERMEN_TELEPORT, volume: 0.5}
+        - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 1, pitch: 1}
+        tickSparkles:
+        - {type: particle, id: fireworks-spark, speed: 0, amount: 2}
+        #- {<<: *cparticle-dust, offset: 0.1 0.4 0.9, amount: 5}
+
+  # normal:
+  #   chance: 0.2
+  #   priceAmount: 10
+  #   priceType: blue-tokens
+  #   coins: 5-25
+  #   power: 4-15
+  #   powerIterations: 2
+  #   brawlerChances:
+  #     common: 0.1
+  #     rare: 0.03
+  #     superrare: 0.02
+  #   item:
+  #     icon: chest
+  #     text: |
+  #       &aОбычный ящик
+
+  #       Открывай ящики и получай
+  #       новых персонажей, очки 
+  #       силы для них, а также монеты,
+  #       чтобы прокачивать персонажей!
+
+  #       &7▶¨ffc966 Шанс выпадения в игре&6 20%
+  #       &7▶¨ffc966 Находящиеся типы бравлеров:
+  #           &7◦ ¨75c1ff Обычные  
+  #           &7◦ &a Редкие
+  #           &7◦ ¨1974d2 Сверхредкие         
+
+  # big:
+  #   chance: 0.05 
+  #   coins: 50-125
+  #   power: 10-35 
+  #   powerIterations: 3 
+  #   brawlerChances:
+  #     common: 0.5 
+  #     rare: 0.2 
+  #     superrare: 0.1
+  #     epic: 0.05
+  #   item:
+  #     icon: chest
+  #     text: |
+  #       &eБольшой Ящик
+
+  #       Открывай ящики и получай
+  #       новых персонажей, очки 
+  #       силы для них, а также монеты,
+  #       чтобы прокачивать персонажей!
+
+  #       &7▶¨ffc966 Шанс выпадения в игре&6 5%
+  #       &7▶¨ffc966 Находящиеся типы бравлеров:
+  #           &7◦ ¨75c1ff Обычные  
+  #           &7◦ &a Редкие
+  #           &7◦ ¨1974d2 Сверхредкие 
+  #           &7◦ ¨a532c2 Эпические   
+
+  # mega:
+  #   chance: 0.01 
+  #   coins: 250-550
+  #   power: 25-50 
+  #   powerIterations: 5 
+  #   brawlerChances: 
+  #     superrare: 0.6
+  #     epic: 0.2
+  #     mythic: 0.15
+  #     legendary: 0.1 
+  #   item:
+  #     icon: chest
+  #     text: |
+  #       &eМегаящик
+
+  #       Открывай ящики и получай
+  #       новых персонажей, очки 
+  #       силы для них, а также монеты,
+  #       чтобы прокачивать персонажей!
+
+  #       &7▶¨ffc966 Шанс выпадения в игре&6 <3%
+  #       &7▶¨ffc966 Находящиеся типы бравлеров:
+  #           &7◦ ¨1974d2 Сверхредкие 
+  #           &7◦ ¨a532c2 Эпические   
+  #           &7◦ ¨ff3333 Мифические
+  #           &7◦ ¨fde910 Легендарные
+
+

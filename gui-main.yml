@@ -1,0 +1,106 @@
+
+items:
+
+  queue:
+    icon: clay_ball
+    text: |
+      㗬 &e&lИграть в &f<game>
+
+      &eСейчас в очереди ▶ &f<online>
+      &f
+    override: true
+
+guis:
+
+  main:
+    title: "&f㾤&8 Навигатор по Бравл Тауну"
+    layout: |
+      ---------
+      ---qqq---
+      ----t----
+      --b---s--
+      ---------
+
+    $queue: &queue
+      char: q
+      native: queue
+      left-click: /queue <info>
+      icon: clay_ball queue
+
+    buttons:
+    - <<: *queue
+      info: gemgrab
+      nbt: {brawl: gemgrab}
+      text: |
+        Собирай кристаллы, появляющиеся 
+        из кристальной шахты в центре 
+        или же отбирай их у врагов! Для 
+        победы удержи у себя 10 кристаллов 
+        до конца обратного отсчёта.
+        
+    - <<: *queue
+      info: bounty
+      nbt: {brawl: bwstar}
+      text: |
+        Собирай звёзды для команды,
+        побеждая противников.  
+        С каждым убийством твоя награда
+        за голову будет увеличиваться.
+        Не дай врагу отобрать твои звёзды!
+
+
+    - <<: *queue
+      info: showdown-solo
+      nbt: {brawl: sb_solo}
+      text: |
+        Участвуй в столкновении на 
+        арене в одиночку! Побеждает 
+        оставшийся в живых.
+
+#    - <<: *queue
+#      info: showdown-duo
+#      nbt: {brawl: sb_duo}
+#      text: |
+#        Участвуй в столкновении на 
+#        арене в паре с товарищем! 
+#        Побеждает команда оставшийся
+#        в живых.
+#
+    - char: 'b'
+      native: brawler
+      icon: (available)
+      text: |
+        㝄 &e&lБравлеры
+        Сражайся в играх, выигрывай Ящики 
+        и открывай из них новых Бравлеров!
+        Прокачивай их, чтобы доминировать
+        над игроками и побеждай в играх.
+      left-click: /gui brawlers
+
+    - char: 's'
+      icon: btn-stats available
+      left-click: /gui stats
+
+    - char: 't'
+      icon: yellow_shulker_box
+      # nbt: {other: coin5}
+      text: |
+        §d§lКупить ящики
+        §eОткрывай новых бравлеров, прокачивай их. Сражайся
+        §eс новой мощью в большом количистве миниигр
+        §eи беспощадно выигрывай всех на своем пути§f 㬦
+      left-click: /gui donate
+
+    - char: 'n'
+      icon: btn-donate available
+      left-click: /gui donate
+
+    - char: '*'
+      icon: header
+
+    - char: '-'
+      icon: empty
+      
+    - char: 'f'
+      icon: unavailable
+

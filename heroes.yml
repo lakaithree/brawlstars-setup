@@ -1,0 +1,1484 @@
+$colored-particle: &colored-particle
+  type: particle
+  amount: 0
+  speed: 1
+
+$dust-particle: &particle-dust
+  <<: *colored-particle
+  id: redstone
+
+$note-particle: &particle-note
+  <<: *colored-particle
+  id: note
+
+
+heroes:
+  shelly: 
+    name: Шелли
+    type: Стрелок
+    rarity: common
+
+    skins:
+      default:
+        name: Обычная Шелли
+
+        head: {icon: clay-ball, nbt: {brawl: shelly}}
+        body: {icon: leather-chestplate, armor-color: 0x_E59EDB, text: '&dЛавандовая футболка'}
+        legs: {icon: leather-leggings,   armor-color: 0x_424BBA, text: '&9Синие джинсы'}
+        feet: {icon: leather-boots,      armor-color: 0x_424BBA, text: '&9Синие бутсы'}
+
+        speed: 0.17 
+
+        attack:
+          icon: clay_ball
+          nbt: {brawl: shelly_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Картечь'
+          cooldown: 1.5s
+
+          sparkles:
+          - {type: sound, id: entity-generic-explode, volume: 0.7, pitch: 2}
+
+          - type: armor-stand
+            lifetime: 0.4s
+            amount: 10
+            motion: 1.5
+            scatter: 20
+            player-decay: 6
+            margin: 0.6
+
+            item: {icon: iron-nugget}
+
+            on-tick:
+            - {type: particle, id: crit}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 7}
+            - {type: sound, id: entity-tnt-primed, volume: 0.9, pitch: 2.0}
+            - {type: particle, id: smoke-normal, amount: 10, speed: 0.5}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Суперобстрел'
+
+          sparkles:
+            - {type: sound, id: entity-generic-explode, pitch: 2}
+
+            - type: armor-stand 
+
+              lifetime: 0.7s
+              amount: 15 
+              motion: 1.5
+              scatter: 15
+              margin: 0.6
+
+              item: {icon: iron-nugget}
+
+              on-tick:
+              - {type: particle, id: crit_magic, amount: 1}
+              - {type: destroy, radius: 1}
+
+              on-entity:
+              - {type: damage, radius: 0, damage: 10, decay-origin: player}
+              - {type: sound, id: entity-tnt-primed, volume: 0.9, pitch: 2}
+              - {type: particle, id: smoke-normal, amount: 10, speed: 0.5}
+              - {type: destroy, radius: 3}
+
+              on-wall:
+              - {type: destroy, radius: 3}
+              - {type: particle, id: explosion-large, amount: 1, speed: 0.17}
+              - {type: sound, id: entity-generic-explode, volume: 0.5, pitch: 1}
+
+
+  poco:
+    name: Поко
+    type: Поддержка
+    rarity: rare    
+
+    skins:
+      default:
+        name: Поко
+        
+        head: {icon: clay-ball, nbt: {brawl: poko}}
+        body: {icon: leather-chestplate, armor-color: 0x_343637, text: '&7Пиджак'}
+        legs: {icon: leather-leggings,   armor-color: 0x_545556, text: '&7Брюки'}
+        feet: {icon: leather-boots,      armor-color: 0x_373441, text: '&7Туфли'}
+
+        speed: 0.17  
+        
+        attack:
+          icon: clay_ball
+          nbt: {brawl: poko_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Мощный Аккорд'
+
+          cooldown: 1.4s
+
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_HAT, pitch: 2.0}
+          - type: armor-stand 
+            lifetime: 0.5s 
+            amount: 15 
+            motion: 1.5
+            scatter: 15 
+            margin: 0.6
+
+            on-tick:
+            - {<<: *particle-dust, offset: 0.1 0.5 0.9}
+            - {<<: *particle-note}
+            - {type: sound, id: BLOCK_NOTE_GUITAR, volume: 0.1, pitch: 2.0}
+            - {type: sound, id: BLOCK_NOTE_XYLOPHONE, volume: 0.1, pitch: 1.0}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 6.5, decay-origin: player}
+            - {type: particle, id: note, amount: 1, speed: 0.5}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb На бис!'
+          sparkles:
+          - {type: effect, amplifier: 2, radius: 2, filter: self, id: HEAL, duration: 3s}
+          - {type: sound, id: BLOCK_NOTE_HAT, pitch: 2.0}
+          - type: armor-stand 
+            lifetime: 0.5s 
+            amount: 30 
+            motion: 1.5
+            scatter: 20 
+            margin: 0.6
+
+            on-tick:
+            - {<<: *particle-dust, offset: 0.1 0.9 0.2}
+            - {<<: *particle-note, offset: 0.3 0.9 0.1}
+            - {type: sound, id: block-note-pling, volume: 0.1}
+            - {type: sound, id: block-note-flute, volume: 0.1}
+
+            on-entity:
+            - {type: effect, amplifier: 5, filter: teammates, radius: 2, id: heal}
+            - {type: effect, amplifier: 5, filter: self, radius: 2, id: heal} 
+            - {type: particle, id: note, amount: 1, speed: 0.5}
+
+            filter: teammates
+#
+#  dynamike:
+#    name: Динамайк
+#    type: Метатель
+#    rarity: common
+#
+#    skins:
+#      default:
+#        name: Динамайк
+#
+#        head: {icon: clay-ball, nbt: {brawl: dinomaik}}
+#        body: {icon: leather-chestplate, armor-color: 0x_F10D0D, text: '&cКрасная Жилетка'}
+#        legs: {icon: leather-leggings,   armor-color: 0x_1C134E, text: '&9Джинсы'}
+#        feet: {icon: leather-boots,      armor-color: 0x_373441, text: '&7Сапоги'}
+#
+#        attack: 
+#          icon: clay_ball
+#          nbt: {brawl: dinomaik_weapeon}
+#          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Лопнувшее терпение'
+#
+#          cooldown: 1s
+#
+#          sparkles:
+#          - <<: {type: tnt, lifetime: 2s, fuse: 1s, amount: 1, motion: 1, scatter: 0}
+#
+#            on-tick:
+#            - {type: particle, id: cloud, amount: 1, speed: 0.17}
+#            - {type: sound, id: entity-tnt-primed, volume: 0.1}
+#            - {type: sound, id: entity-stray-step, volume: 0.1}
+#
+#            on-entity:
+#            - {type: damage, radius: 0, damage: 3, decay-origin: player}
+#            - {type: particle, id: cloud, amount: 1, speed: 0.5}
+#
+#        gadget:
+#          icon: gadget air
+#          sparkles: []
+#
+#        super:
+#          icon: diamond_barding
+#          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Большой ба-бах'
+#
+#          sparkles:
+#          - <<: {type: tnt, lifetime: 2s, fuse: 1s, amount: 3, motion: 1, scatter: 60}
+#
+#            on-tick:
+#            - {<<: *particle-dust, offset: 0.1 0.1 0.1}
+#            - {type: sound, id: entity-tnt-primed, volume: 0.1}
+#            - {type: sound, id: entity-stray-step, volume: 0.1}
+#            - {type: particle, id: flame, amount: 3, speed: 1}
+#
+#            on-entity:
+#            - {type: damage, radius: 0, damage: 3, decay-origin: player}
+#            - {type: particle, id: cloud, speed: 0.5}
+
+  colt:
+    name: Кольт
+    type: Стрелок
+    rarity: common
+
+    skins:
+      default:
+        name: Кольт
+        
+        head: {icon: clay-ball, nbt: {brawl: kolt}}
+        body: {icon: leather-chestplate, armor-color: 0x_F10D0D, text: '&cКрасная Жилетка'}
+        legs: {icon: leather-leggings,   armor-color: 0x_1C134E, text: '&9Джинсы'}
+        feet: {icon: leather-boots,      armor-color: 0x_373441, text: '&7Сапоги'}
+
+        speed: 0.17  
+        
+        attack:
+          icon: clay_ball
+          nbt: {brawl: kolt_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Полная обойма'
+
+          cooldown: 1.6s
+
+          sparkles:
+          - {type: sound, id: ENTITY_GENERIC_EXPLODE, volume: 0.5, pitch: 0.7}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 0.7s, amount: 6, motion: 4, scatter: 1, interval: 0.1s}
+            item: {icon: redstone-block}
+
+            on-tick:
+            - {type: particle, id: block-dust, data: redstone-block, speed: 0}
+            - {<<: *particle-dust, offset: 0.9 0.1 0.1}
+            - {type: sound, id: BLOCK_NOTE_SNARE, volume: 0.3, pitch: 0.5}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 4, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Пулевой шторм'
+          sparkles:
+          - {type: sound, id: ENTITY_GENERIC_EXPLODE, volume: 0.5, pitch: 0.7}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 0.7s, amount: 10, motion: 4.5, scatter: 1, interval: 0.1s}
+            item: {icon: redstone-block}
+
+            on-tick:
+            - {type: particle, id: block-dust, data: redstone-block, speed: 0.17}
+            - {<<: *particle-dust, offset: 0.9 0.1 0.1}
+            - {type: sound, id: BLOCK_NOTE_SNARE, volume: 0.3, pitch: 0.5}
+            - {type: destroy, radius: 1}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 7, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0}
+
+            on-hit:
+            - {type: destroy, radius: 3}
+            - {type: particle, id: explosion-large, amount: 1, speed: 0.17}
+            - {type: sound, id: entity-generic-explode, volume: 0.5, pitch: 1}  
+
+            on-wall:
+            - {type: destroy, radius: 3}
+            - {type: particle, id: explosion-large, amount: 1, speed: 0.17}
+            - {type: sound, id: entity-generic-explode, volume: 0.5, pitch: 1}             
+
+
+  bea:
+    name: Беа
+    type: Стрелок
+    rarity: epic
+
+    skins:
+      default:
+        name: Беа
+        
+        head: {icon: clay-ball, nbt: {brawl: bea}}
+        body: {icon: leather-chestplate, armor-color: 0x_FFFF07, text: '&eЖелтая Жилетка'}
+        legs: {icon: leather-leggings,   armor-color: 0x_AD1EEA, text: '&dШтаны'}
+        feet: {icon: leather-boots,      armor-color: 0x_FFFF07, text: '&eСапоги'}
+
+        speed: 0.17  
+
+        
+        attack:
+          icon: clay_ball
+          nbt: {brawl: bea_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Длинное жало'
+
+          cooldown: 0.9s
+
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_BASEDRUM, volume: 1.7, pitch: 2}
+          - <<: {type: armor-stand, margin: 0.75, lifetime: 10s, amount: 1, motion: 1.2, scatter: 1}
+            item: {icon: skull-item, data: 3, skin: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTQ3MzIyZjgzMWUzYzE2OGNmYmQzZTI4ZmU5MjUxNDRiMjYxZTc5ZWIzOWM3NzEzNDlmYWM1NWE4MTI2NDczIn19fQ==}
+
+            on-tick:
+            - {type: particle, id: block-crack, speed: 0, data: sponge, amount: 3}
+            - {type: particle, id: block-crack, speed: 0, data: fire, amount: 3}
+            - {type: particle, id: block-crack, speed: 0, data: gold-block, amount: 3}
+            - {type: sound, id: ITEM_ARMOR_EQUIP_LEATHER, volume: 0.5}
+            - {type: sound, id: BLOCK_NOTE_CHIME, volume: 0.7, pitch: 2}
+            - {type: sound, id: UI_BUTTON_CLICK, volume: 0.4, pitch: 2}            
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 7, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0.5, amount: 5}
+            - {type: sound, id: ENTITY_BAT_DEATH, volume: 0.2, pitch: 1} 
+
+            on-wall:
+            - {type: particle, id: VILLAGER_HAPPY, speed: 0.5, amount: 5}
+
+            on-expire:
+            - {<<: *particle-dust, offset: 0.1 0.5 0.9}
+
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Железный рой'
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_BASEDRUM, volume: 1.7, pitch: 2}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 1s, amount: 5, motion: 0.6, scatter: 20}
+            item: {icon: skull-item, data: 3, skin: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTQ3MzIyZjgzMWUzYzE2OGNmYmQzZTI4ZmU5MjUxNDRiMjYxZTc5ZWIzOWM3NzEzNDlmYWM1NWE4MTI2NDczIn19fQ==}
+
+
+            on-tick:
+            - {type: particle, id: block-crack, speed: 0, data: sponge, amount: 3}
+            - {type: particle, id: block-crack, speed: 0, data: fire, amount: 3}
+            - {type: particle, id: block-crack, speed: 0, data: gold-block, amount: 3}
+            - {type: sound, id: ITEM_ARMOR_EQUIP_LEATHER, volume: 0.5}
+            - {type: sound, id: BLOCK_NOTE_CHIME, volume: 0.7, pitch: 2}
+            - {type: sound, id: UI_BUTTON_CLICK, volume: 0.4, pitch: 2}            
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 10, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0.5, amount: 5}
+            - {type: effect, amplifier: 2, id: SLOW, filter: enemies, duration: 6s}
+            - {type: sound, id: ENTITY_BAT_DEATH, volume: 0.2, pitch: 1} 
+
+  max:
+    name: Макс
+    type: Поддержка
+    rarity: mythic
+
+    skins:
+      default:
+        name: Макс
+        
+        head: {icon: clay-ball, nbt: {brawl: max}}
+        body: {icon: leather-chestplate, armor-color: 0x_FFFF07, text: '&eЖелтый Костюм'}
+        legs: {icon: leather-leggings,   armor-color: 0x_DE1F1F, text: '&сШтаны'}
+        feet: {icon: leather-boots,      armor-color: 0x_FFFF07, text: '&eСапоги'}
+
+        speed: 0.24
+        
+        attack:
+          icon: clay_ball
+          nbt: {brawl: max_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Ускоренный бластер'
+
+          cooldown: 1.3s
+
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_BASEDRUM, volume: 1.7, pitch: 1.5}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 1.5s, amount: 4, motion: 1.5, scatter: 1, interval: 0.1s}
+            item: {icon: stained-glass-pane, data: 3}
+
+
+            on-tick:
+            - {type: particle, id: block-crack, speed: 0, data: "stained-glass-pane:3", amount: 3}
+            - {<<: *particle-dust, offset: 0.1 0.5 0.9}
+            - {type: sound, id: ENTITY_FIREWORK_BLAST, volume: 0.5, pitch: 2}
+            - {type: sound, id: ENTITY_PARROT_FLY, volume: 0.7, pitch: 2}       
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 5, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0, amount: 3}
+            - {type: sound, id: entity-generic-explode, volume: 0.2, pitch: 1} 
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Погнали!'
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_BASEDRUM, volume: 1.7, pitch: 1}
+          - {type: sound, id: BLOCK_SLIME_PLACE, volume: 1.7, pitch: 2}   
+          - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 1.7, pitch: 2}       
+          - {type: effect, amplifier: 2, filter: teammates, radius: 2, id: speed, duration: 7s}
+          - {type: effect, amplifier: 2, filter: self, radius: 2, id: speed, duration: 7s}
+
+          filter: teammates 
+
+  piper:
+    name: Пайпер
+    type: Стрелок
+    rarity: epic
+
+    skins:
+      default:
+        name: Пайпер
+        
+        head: {icon: clay-ball, nbt: {brawl: paper}}
+        body: {icon: leather-chestplate, armor-color: 0x_449EED, text: '&bГолубое Платье'}
+        legs: {icon: leather-leggings,   armor-color: 0x_449EED, text: ''}
+        feet: {icon: leather-boots,      armor-color: 0x_449EED, text: ''}
+
+        speed: 0.17  
+        
+        attack:
+          icon: clay_ball
+          nbt: {brawl: paper_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Зонтовка'
+
+          cooldown: 2.1s
+
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_BASEDRUM, volume: 1.7, pitch: 2}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 1.5s, amount: 1, motion: 1.5, scatter: 1}
+            item: {icon: quartz-block}
+
+
+            on-tick:
+            - {type: particle, id: block-crack, speed: 0, data: quartz-block, amount: 3}
+            - {<<: *particle-dust, offset: 0.9 0.1 0.9, amount: 3}
+            - {type: particle, id: FIREWORKS_SPARK, speed: 0, amount: 2}
+            - {type: sound, id: BLOCK_NOTE_CHIME, volume: 0.4, pitch: 2}
+            - {type: sound, id: BLOCK_NOTE_FLUTE, volume: 0.4, pitch: 2}            
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 10.5, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0.5, amount: 5}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Ультра Променад'
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_BASEDRUM, volume: 1.7, pitch: 2}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 1.5s, amount: 1, motion: 1.5, scatter: 1}
+            item: {icon: quartz-block}
+
+
+            on-tick:
+            - {type: particle, id: block-crack, speed: 0, data: quartz-block, amount: 3}
+            - {<<: *particle-dust, offset: 0.9 0.1 0.9, amount: 3}
+            - {type: particle, id: FIREWORKS_SPARK, speed: 0, amount: 2}
+            - {type: sound, id: BLOCK_NOTE_CHIME, volume: 0.4, pitch: 2}
+            - {type: sound, id: BLOCK_NOTE_FLUTE, volume: 0.4, pitch: 2}            
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 14, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0.5, amount: 5} 
+
+  8bit:
+    name: 8-БИТ
+    type: Стрелок
+    rarity: common
+
+    skins:
+      default:
+        name: 8-БИТ
+        
+        head: {icon: clay-ball, nbt: {brawl: 8bit}}
+        body: {icon: leather-chestplate, armor-color: 0x_449EED, text: ''}
+        legs: {icon: leather-leggings,   armor-color: 0x_94ACC0, text: ''}
+        feet: {icon: leather-boots,      armor-color: 0x_449EED, text: ''}
+
+        speed: 0.17  
+        
+        attack:
+          icon: clay_ball
+          nbt: {brawl: 8bit_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Лучевой бластер'
+
+          cooldown: 1.5s
+
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_BASEDRUM, volume: 1.7, pitch: 1.5}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 1.5s, amount: 4, motion: 1.5, scatter: 1, interval: 0.1s}
+            item: {icon: concrete, data: 3}
+
+
+            on-tick:
+            - {type: particle, id: block-crack, speed: 0, data: "stained-glass-pane:3", amount: 3}
+            - {<<: *particle-dust, offset: 0.1 0.5 0.9}
+            - {type: sound, id: BLOCK_TRIPWIRE_CLICK_ON, volume: 0.5, pitch: 1.5}   
+            - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 0.5, pitch: 2}    
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 7.5, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0, amount: 3}
+            - {type: sound, id: entity-generic-explode, volume: 0.2, pitch: 1} 
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Усилитель урона'
+          sparkles:
+          - {type: sound, id: BLOCK_SLIME_PLACE, volume: 1.7, pitch: 1}   
+          - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 1, pitch: 2}       
+          - {type: effect, amplifier: 2, radius: 5, filter: teammates, id: INCREASE_DAMAGE, duration: 8s}
+          - {type: effect, amplifier: 2, radius: 2, filter: self, id: INCREASE_DAMAGE, duration: 7s}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 0.5s, amount: 12, motion: 1.5, scatter: 180}
+            item: {icon: air}
+
+            on-tick:
+            - {<<: *particle-dust, offset: 0.9 0.1 0.9, amount: 3}
+            - {type: particle, id: SPELL_WITCH, speed: 0, amount: 4}
+            - {type: sound, id: BLOCK_NOTE_CHIME, volume: 0.4, pitch: 2}
+            - {type: sound, id: BLOCK_NOTE_FLUTE, volume: 0.4, pitch: 2}  
+
+            on-entity: []
+
+  emz:
+    name: Эмз
+    type: Воин
+    rarity: common
+
+    skins:
+      default:
+        name: Эмз
+
+        speed: 0.17  
+                
+        head: {icon: clay-ball, nbt: {brawl: emz}}
+        body: {icon: leather-chestplate, armor-color: 0x_C01FB3, text: '&5Рубашка'}
+        legs: {icon: leather-leggings,   armor-color: 0x_B2B7AE, text: '&7Бинты'}
+        feet: {icon: leather-boots,      armor-color: 0x_8E14DF, text: '&dКроссовки'}
+
+        attack:
+          icon: clay_ball
+          nbt: {brawl: emz_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Спрей'
+
+          cooldown: 2s
+
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_HAT, pitch: 2.0}
+          - type: armor-stand 
+            lifetime: 0.5s 
+            amount: 15 
+            motion: 1.5
+            scatter: 15 
+
+            on-tick:
+            - {type: particle, id: SPELL_WITCH, speed: 0, amount: 4}
+            - {type: particle, id: DAMAGE_INDICATOR, speed: 0, amount: 1}
+            - {type: sound, id: BLOCK_LAVA_EXTINGUISH, volume: 0.3, pitch: 1.5}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 10, decay-origin: player}
+
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Жгучая харизма'
+          sparkles:
+          - {type: sound, id: BLOCK_SLIME_PLACE, volume: 1.7, pitch: 1}   
+          - {type: sound, id: BLOCK_LAVA_EXTINGUISH, volume: 0.3, pitch: 1.5}     
+          - {type: effect, amplifier: 2, radius: 2, filter: enemies, id: POISON, duration: 7s}
+          - {type: effect, amplifier: 2, radius: 2, filter: enemies, id: SLOW, duration: 7s}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 0.5s, amount: 24, motion: 1.5, scatter: 180}
+            item: {icon: air}
+
+            on-tick:
+            - {type: particle, id: DAMAGE_INDICATOR, speed: 0, amount: 2}
+            - {type: particle, id: SPELL_WITCH, speed: 0, amount: 4}
+            - {type: sound, id: BLOCK_LAVA_EXTINGUISH, volume: 0.1, pitch: 1.5}
+            - {type: sound, id: ENTITY_WITHER_HURT, volume: 0.1, pitch: 1}  
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 12, decay-origin: player}
+
+            filter: enemies
+
+
+  tara:
+    name: Тара
+    type: Воин
+    rarity: mythic
+
+    skins:
+      default:
+        name: Тара
+        
+        head: {icon: clay-ball, nbt: {brawl: tara}}
+        body: {icon: leather-chestplate, armor-color: 0x_C01FB3, text: '&5Рубашка'}
+        legs: {icon: leather-leggings,   armor-color: 0x_FFBC08, text: '&6Шорты'}
+        feet: {icon: leather-boots,      armor-color: 0x_751853, text: '&dБабуши'}
+
+        speed: 0.17  
+        
+        attack:
+          icon: clay_ball
+          nbt: {brawl: tara_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Три карты таро'
+
+          cooldown: 1.3s
+
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_HAT, pitch: 2.0}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 0.7s, amount: 3, motion: 1.5, scatter: 15, interval: 0.1s}
+            item: {icon: clay_ball, nbt: {brawl: tara_weapeon}}
+
+            on-tick:
+            - {type: particle, id: FIREWORKS_SPARK, speed: 0, amount: 4}
+            - {type: sound, id: ENTITY_WITCH_DRINK, volume: 0.3, pitch: 1.5}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 6, decay-origin: player}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Улетай!'
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_HAT, pitch: 2.0}
+          - <<: {type: armor-stand, margin: 0.8, lifetime: 0.7s, amount: 20, motion: 1.5, scatter: 180, interval: 0.1s}
+            item: {icon: clay_ball, nbt: {brawl: tara_weapeon}}
+
+            on-tick:
+            - {type: particle, id: FIREWORKS_SPARK, speed: 0, amount: 4}
+            - {type: sound, id: ENTITY_WITCH_DRINK, volume: 0.3, pitch: 1.5}
+            - {type: sound, id: ENTITY_WOLF_DEATH, volume: 0.3, pitch: 2}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 13, decay-origin: player}
+
+  leon:
+    name: Леон
+    type: Скрытный Убийца
+    rarity: legendary
+
+    skins:
+      default:
+        name: Леон
+        
+        head: {icon: clay-ball, nbt: {brawl: leon}}
+        body: {icon: leather-chestplate, armor-color: 0x_21CC34, text: '&aКофта'}
+        legs: {icon: leather-leggings,   armor-color: 0x_3C6AC4, text: '&9Шорты'}
+        feet: {icon: leather-boots,      armor-color: 0x_C4963C, text: ''}
+
+        speed: 0.24  
+        
+        attack:
+          icon: clay_ball
+          nbt: {brawl: leon_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Крутящиеся лезвия'
+
+          cooldown: 1.7s
+
+
+          sparkles:
+          - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1.7, pitch: 1.5}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 1.5s, amount: 4, motion: 1.5, scatter: 1, interval: 0.2s}
+            item: {icon: clay_ball, nbt: {brawl: leon_weapeon}}
+
+            on-tick:
+            - {type: particle, id: block-crack, speed: 0.175, data: "stained-glass-pane:3", amount: 3}
+            - {<<: *particle-dust, offset: 0.1 0.5 0.9}
+            - {type: sound, id: BLOCK_SLIME_BREAK, volume: 0.5, pitch: 1.5}   
+            - {type: sound, id: ENTITY_ENDEREYE_LAUNCH, volume: 0.5, pitch: 2}    
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 5, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0, amount: 3}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Дымовая бомба'
+          sparkles:
+          - {type: particle, id: EXPLOSION_LARGE, speed: 0, amount: 6}
+          - {type: sound, id: ENTITY_BLAZE_BURN, volume: 1, pitch: 2}
+          - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 0.2, pitch: 1.6}   
+          - {type: effect, amplifier: 2, radius: 2, filter: self, id: speed, duration: 5s} 
+          - {type: effect, amplifier: 2, radius: 2, filter: self, id: INVISIBILITY, duration: 5s}        
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 0.1s, amount: 1, motion: 1.5, scatter: 180}
+            item: {icon: air}
+
+            on-tick: []
+
+            on-entity: []
+
+
+  sandy:
+    name: Сэнди
+    type: Поддержка
+    rarity: legendary
+
+    skins:
+      default:
+        name: Сэнди
+        
+        head: {icon: clay-ball, nbt: {brawl: sandy}}
+        body: {icon: leather-chestplate, armor-color: 0x_BE00FF, text: '&dПижама'}
+        legs: {icon: leather-leggings,   armor-color: 0x_E76AA2, text: '&dШтаны'}
+        feet: {icon: leather-boots,      armor-color: 0x_702D92, text: '&7Тапочки'}
+
+        speed: 0.2  
+        
+        attack:
+          icon: clay_ball
+          nbt: {brawl: sandy_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Колючий гравий'
+
+          cooldown: 1.5s
+
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_HAT, pitch: 2.0}
+          - type: armor-stand 
+            lifetime: 0.35s 
+            amount: 15 
+            motion: 1.5
+            scatter: 15 
+
+            on-tick:
+            - {<<: *particle-dust, offset: 0.1 0.5 0.9}
+            - {<<: *particle-dust, offset: 0.9 0.9 0.1}
+            - {type: particle, id: block-crack, speed: 0.175, data: "stained-glass-pane:3", amount: 3}
+            - {type: particle, id: block-crack, speed: 0.175, data: "wool:3", amount: 3}
+            - {type: sound, id: ENTITY_GHAST_SCREAM, volume: 0.1, pitch: 2.0}
+            - {type: sound, id: ENTITY_ENDERDRAGON_FLAP, volume: 0.4, pitch: 1.0}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 8, decay-origin: player}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Песчаная буря'
+          sparkles:
+          - {type: effect, amplifier: 2, radius: 2, filter: self, id: INVISIBILITY, duration: 6s}  
+          - {type: sound, id: ENTITY_ELDER_GUARDIAN_AMBIENT, volume: 1.0, pitch: 1.0}
+          - type: armor-stand 
+            lifetime: 8.0s 
+            amount: 30 
+            motion: 0.08
+            scatter: 180 
+            margin: 0.6
+
+            on-tick:
+            - {<<: *particle-dust, offset: 0.5 0.3 0.1} 
+            - {type: particle, id: block-crack, speed: 0.175, data: "stained-glass-pane:12", amount: 6}
+            - {type: particle, id: block-crack, speed: 0.175, data: "dirt:1", amount: 6}
+
+            on-entity:
+            - {type: effect, amplifier: 2, radius: 2, filter: self, id: speed, duration: 3s} 
+            - {type: effect, amplifier: 2, radius: 2, filter: teammates, id: INVISIBILITY, duration: 6s}
+            - {type: effect, amplifier: 2, radius: 2, filter: self, id: INVISIBILITY, duration: 6s}
+            - {type: effect, amplifier: 2, id: SLOW, filter: enemies, duration: 6s}
+            - {type: damage, radius: 0, damage: 6, decay-origin: player}
+
+
+  rico:
+    name: Рико
+    type: Стрелок
+    rarity: superrare
+
+    skins:
+      default:
+        name: Рико
+        
+        head: {icon: clay-ball, nbt: {brawl: rico}}
+        body: {icon: leather-chestplate, armor-color: 0x_6547BE, text: ''}
+        legs: {icon: leather-leggings,   armor-color: 0x_42395E, text: ''}
+        feet: {icon: leather-boots,      armor-color: 0x_6547BE, text: ''}
+
+
+        speed: 0.17  
+        
+
+        attack:
+          icon: clay_ball
+          nbt: {brawl: rico_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Пружинящие пули'
+
+          cooldown: 1.3s
+
+
+          sparkles:
+          - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1.7, pitch: 1.5}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 1s, amount: 5, motion: 2, scatter: 1, interval: 0.1s}
+            item: {icon: snow-ball}
+
+               
+            on-tick:
+            - {<<: *particle-dust, offset: 0.1 0.5 0.9}
+            - {<<: *particle-dust, offset: 0.1 0.5 0.9}
+            - {<<: *particle-dust, offset: 0.1 0.5 0.9}  
+            - {type: sound, id: ENTITY_VEX_AMBIENT, volume: 0.1, pitch: 0.6}    
+            - {type: sound, id: ENTITY_SHULKER_SHOOT, volume: 0.1, pitch: 1.5}
+
+            max-bounces: 4
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 4.5, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0, amount: 3}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Коронный удар'
+          sparkles:
+          - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1.7, pitch: 1.5}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 1s, amount: 12, motion: 2.5, scatter: 1, interval: 0.1s}
+            item: {icon: snow-block}
+
+            on-tick:
+            - {<<: *particle-dust, offset: 0.1 0.5 0.9}
+            - {<<: *particle-dust, offset: 0.1 0.5 0.9}
+            - {<<: *particle-dust, offset: 0.1 0.5 0.9}  
+            - {type: sound, id: ENTITY_VEX_AMBIENT, volume: 0.3, pitch: 0.6}    
+            - {type: sound, id: ENTITY_SHULKER_SHOOT, volume: 0.3, pitch: 1.5}
+
+            max-bounces: 5
+            
+            on-entity:
+            - {type: damage, radius: 0, damage: 8, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0, amount: 3}
+
+
+  frank:
+    name: Фрэнк
+    type: Тяжеловес
+    rarity: epic    
+
+    skins:
+      default:
+        name: Фрэнк
+        
+        head: {icon: clay-ball, nbt: {brawl: frank}}
+        body: {icon: leather-chestplate, armor-color: 0x_422FB2, text: ''}
+        legs: {icon: leather-leggings,   armor-color: 0x_624687, text: ''}
+        feet: {icon: leather-boots,      armor-color: 0x_B173BE, text: ''}
+
+
+        speed: 0.17        
+
+        attack:
+          icon: clay_ball
+          nbt: {brawl: frank_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Удар молота'
+
+          cooldown: 1s
+
+
+          sparkles:  
+          - {type: effect, amplifier: 255, filter: self, id: slow, duration: 2s, radius: 2}  
+          - {type: sound, id: ENTITY_ILLUSION_ILLAGER_PREPARE_BLINDNESS, volume: 2, pitch: 0.5}
+          - <<: {type: armor-stand, margin: 0, lifetime: 0.7s, amount: 1, motion: 0, scatter: 0}
+            item: {icon: air}
+
+            on-expire:
+            - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1.7, pitch: 1.5}  
+            - <<: {type: armor-stand, margin: 0.6, lifetime: 0.6s, amount: 4, motion: 1, scatter: 25}
+              item: {icon: ice} 
+
+              on-tick:
+              - {type: particle, id: cloud, speed: 0, amount: 3}
+              - {type: particle, id: CRIT_MAGIC, speed: 0, amount: 3}
+              - {type: sound, id: BLOCK_ANVIL_PLACE, volume: 0.1, pitch: 0.5}    
+              - {type: sound, id: ENTITY_LIGHTNING_IMPACT, volume: 0.2, pitch: 1.5}
+  
+              on-entity:
+              - {type: damage, radius: 0, damage: 11, decay-origin: player}
+              - {type: particle, id: cloud, speed: 0, amount: 3}
+
+            on-tick: []
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Ошеломляющий удар'
+
+          sparkles:  
+          - {type: effect, amplifier: 255, filter: self, id: slow, duration: 2s, radius: 2}  
+          - {type: sound, id: ENTITY_ILLUSION_ILLAGER_PREPARE_BLINDNESS, volume: 2, pitch: 0.5}
+          - <<: {type: armor-stand, margin: 0, lifetime: 0.7s, amount: 1, motion: 0, scatter: 0}
+            item: {icon: air}
+
+            on-expire:
+            - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1.7, pitch: 1.5}  
+            - <<: {type: armor-stand, margin: 0.6, lifetime: 0.6s, amount: 4, motion: 1, scatter: 25}
+              item: {icon: ice} 
+
+              on-tick:
+               - {type: particle, id: SMOKE_NORMAL, speed: 0, amount: 2}
+               - {type: particle, id: CRIT_MAGIC, speed: 0, amount: 5}
+               - {type: sound, id: BLOCK_ANVIL_PLACE, volume: 0.1, pitch: 0.5}    
+               - {type: sound, id: ENTITY_WITHER_HURT, volume: 0.2, pitch: 1.5}
+               - {type: particle, id: DAMAGE_INDICATOR, speed: 0, amount: 1}
+               - {type: destroy, radius: 1} 
+  
+              on-entity:
+               - {type: damage, radius: 0, damage: 12, decay-origin: player}
+               - {type: particle, id: cloud, speed: 0, amount: 3}
+               - {type: effect, amplifier: 255, filter: enemies, id: slow, duration: 4s}
+               - {type: effect, amplifier: 128, filter: enemies, id: jump, duration: 4s}
+
+              on-hit:
+               - {type: destroy, radius: 3}
+               - {type: particle, id: explosion-large, amount: 1, speed: 0.17}
+               - {type: sound, id: entity-generic-explode, volume: 0.5, pitch: 1} 
+
+              on-wall:
+               - {type: destroy, radius: 3}
+               - {type: particle, id: explosion-large, amount: 1, speed: 0.17}
+               - {type: sound, id: entity-generic-explode, volume: 0.5, pitch: 1}  
+
+            on-tick: []
+ 
+  brock:
+    name: Брок
+    type: Стрелок
+    rarity: common
+
+    skins:
+      default:
+        name: Брок
+        
+        head: {icon: clay-ball, nbt: {brawl: broke}}
+        body: {icon: leather-chestplate, armor-color: 0x_FFFFFF, text: '&fФутболка'}
+        legs: {icon: leather-leggings,   armor-color: 0x_233268, text: '&9Штаны'}
+        feet: {icon: leather-boots,      armor-color: 0x_6B6963, text: '&7Кроссовки'}
+
+
+        speed: 0.18  
+        
+
+        attack:
+          icon: clay_ball
+          nbt: {brawl: broke_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Роковая ракета'
+
+          cooldown: 2.1s
+
+          sparkles:
+          - {type: sound, id: ENTITY_GENERIC_EXPLODE, volume: 1, pitch: 1.5}
+          - <<: {type: armor-stand, margin: 0.8, lifetime: 1.0s, amount: 1, motion: 1.5, scatter: 1}
+            item: {icon: anvil}
+
+
+            on-tick:
+            - {type: particle, id: SWEEP_ATTACK, speed: 0, amount: 1}
+            - {type: particle, id: block-crack, speed: 0, data: stone, amount: 3}
+            - {type: particle, id: block-crack, speed: 0, data: "stained-glass-pane:7", amount: 3}
+            - {type: particle, id: block-crack, speed: 0, data: "wool:14", amount: 3}
+            - {type: sound, id: ENTITY_TNT_PRIMED, volume: 0.3}       
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 9.5, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0.5, amount: 5}
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Ракетный дождь'
+          sparkles:
+          - {type: sound, id: ENTITY_GENERIC_EXPLODE, volume: 1, pitch: 1.5}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 1.0s, amount: 8, motion: 1.5, scatter: 15, interval: 0.1s}
+            item: {icon: anvil}
+
+
+            on-tick:
+            - {type: particle, id: SWEEP_ATTACK, speed: 0, amount: 1}
+            - {type: particle, id: block-crack, speed: 0, data: stone, amount: 3}
+            - {type: particle, id: block-crack, speed: 0, data: "stained-glass-pane:7", amount: 3}
+            - {type: particle, id: block-crack, speed: 0, data: "wool:14", amount: 3}
+            - {type: sound, id: ENTITY_TNT_PRIMED, volume: 0.3}    
+            - {type: destroy, radius: 1}   
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 11, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0.5, amount: 5}
+
+            on-hit:
+            - {type: destroy, radius: 3}
+            - {type: particle, id: explosion-large, amount: 1, speed: 0.17}
+            - {type: sound, id: entity-generic-explode, volume: 0.5, pitch: 1}  
+
+            on-wall:
+            - {type: destroy, radius: 3}
+            - {type: particle, id: explosion-large, amount: 1, speed: 0.17}
+            - {type: sound, id: entity-generic-explode, volume: 0.5, pitch: 1}    
+
+  darryl: 
+    name: Дэррил
+    type: Тяжеловес
+    rarity: superrare
+
+    skins:
+      default:
+        name: Дэррил
+
+        head: {icon: clay-ball, nbt: {brawl: derill}}
+        body: {icon: leather-chestplate, armor-color: 0x_521D7B, text: ''}
+        legs: {icon: leather-leggings,   armor-color: 0x_3B244C, text: ''}
+        feet: {icon: leather-boots,      armor-color: 0x_521D7B, text: ''}
+
+
+        speed: 0.18 
+        
+
+        attack:
+          icon: clay_ball
+          nbt: {brawl: derill_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Дважды два'
+          cooldown: 1.5s
+
+          sparkles:
+          - {type: sound, id: entity-generic-explode, volume: 0.1, pitch: 2}
+
+          - type: armor-stand
+            lifetime: 0.5s
+            amount: 12
+            motion: 1.5
+            scatter: 12
+            player-decay: 6
+
+            item: {icon: stone-button}
+
+            on-tick:
+            - {type: particle, id: crit_magic}
+            - {type: sound, id: ENTITY_MAGMACUBE_JUMP, volume: 0.1, pitch: 2.0}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 9.5}
+            - {type: sound, id: entity-tnt-primed, volume: 0.1, pitch: 2.0}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Убегай!'
+
+          sparkles:
+          - {type: sound, id: entity-generic-explode, volume: 0.1, pitch: 2}
+
+          - type: armor-stand
+            lifetime: 0.5s
+            amount: 36
+            motion: 1.5
+            scatter: 180
+
+            item: {icon: stone-button}
+
+            on-tick:
+            - {type: particle, id: crit_magic}
+            - {type: sound, id: ENTITY_MAGMACUBE_JUMP, volume: 0.1, pitch: 2.0}
+            - {type: destroy, radius: 1}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 10}
+            - {type: sound, id: entity-tnt-primed, volume: 0.1, pitch: 2.0}
+
+            on-hit:
+            - {type: destroy, radius: 3}
+            - {type: particle, id: explosion-large, amount: 1, speed: 0.17}
+            - {type: sound, id: entity-generic-explode, volume: 0.5, pitch: 1}  
+
+            on-wall:
+            - {type: destroy, radius: 3}
+            - {type: particle, id: explosion-large, amount: 1, speed: 0.17}
+            - {type: sound, id: entity-generic-explode, volume: 0.5, pitch: 1}    
+
+  bull: 
+    name: Булл
+    type: Тяжеловес
+    rarity: common
+
+    skins:
+      default:
+        name: Булл
+
+        head: {icon: clay-ball, nbt: {brawl: bull}}
+        body: {icon: leather-chestplate, armor-color: 0x_C5BFC9, text: '&7Футболка'}
+        legs: {icon: leather-leggings,   armor-color: 0x_3E3284, text: '&9Джинсы'}
+        feet: {icon: leather-boots,      armor-color: 0x_282829, text: '&8Сапоги'}
+
+
+        speed: 0.18 
+        
+
+        attack:
+          icon: clay_ball
+          nbt: {brawl: bull_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Двустволка'
+          cooldown: 1.4s
+
+          sparkles:
+          - {type: sound, id: entity-generic-explode, volume: 1, pitch: 1}
+
+          - type: armor-stand
+            lifetime: 0.5s
+            amount: 12
+            motion: 1.5
+            scatter: 15
+            player-decay: 4
+
+            item: {icon: stone-button, nbt: {color: 16711680}}
+
+            on-tick:
+            - {type: particle, id: crit_magic}
+            - {<<: *particle-dust, offset: 0.9 0.1 0.1}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 7.5}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Бульдозер'
+
+          sparkles:
+          - {type: sound, id: AMBIENT_CAVE, volume: 0.3, pitch: 2}
+
+          - type: armor-stand
+            lifetime: 0.5s
+            amount: 20
+            motion: 1.5
+            scatter: 25
+
+            item: {icon: stone-button, nbt: {color: 16711680}}
+
+            on-tick:
+            - {type: destroy, radius: 1}  
+            - {type: particle, id: crit_magic}
+            - {<<: *particle-dust, offset: 0.9 0.1 0.1}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 10}
+
+            on-hit:
+            - {type: destroy, radius: 3}
+            - {type: particle, id: explosion-large, amount: 1, speed: 0.17}
+            - {type: sound, id: entity-generic-explode, volume: 0.5, pitch: 1}  
+
+            on-wall:
+            - {type: destroy, radius: 3}
+            - {type: particle, id: explosion-large, amount: 1, speed: 0.17}
+            - {type: sound, id: entity-generic-explode, volume: 0.5, pitch: 1}    
+
+  pam:
+    name: Пэм
+    type: Поддержка
+    rarity: epic
+
+    skins:
+      default:
+        name: Пэм
+        
+        head: {icon: clay-ball, nbt: {brawl: pam}}
+        body: {icon: leather-chestplate, armor-color: 0x_398ECE, text: '&bРубашка'}
+        legs: {icon: leather-leggings,   armor-color: 0x_E6B01F, text: '&6Штаны'}
+        feet: {icon: leather-boots,      armor-color: 0x_C0285F, text: '&cБотинки'}
+
+        speed: 0.17  
+        
+        attack:
+          icon: clay_ball
+          nbt: {brawl: pam_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Буря лома'
+
+          cooldown: 1.5s
+
+
+          sparkles:
+          - {type: sound, id: ENTITY_LLAMA_SPIT, volume: 1.7, pitch: 1.5}
+          - type: armor-stand
+            lifetime: 1.3s
+            amount: 12
+            motion: 1.5
+            scatter: 2
+            interval: 0.1s
+
+            item: {icon: stone-button, nbt: {color: 16711680}}
+
+            on-tick:  
+            - {type: sound, id: ENTITY_SHULKER_TELEPORT, volume: 0.4, pitch: 0.5}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 5.5, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0, amount: 3}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Мамочкин поцелуй'
+          sparkles:
+          - {type: effect, amplifier: 6, radius: 2, filter: self, id: heal}
+          - {type: sound, id: ENTITY_WITHER_AMBIENT, volume: 0.6, pitch: 2.0}
+          - type: armor-stand 
+            lifetime: 4.0s 
+            amount: 30 
+            motion: 0.2
+            scatter: 180 
+
+            on-tick:
+            - {type: particle, id: block-crack, speed: 0.175, data: "stained-glass-pane:5", amount: 4}
+            - {type: particle, id: block-crack, speed: 0.175, data: "concrete:5", amount: 4}
+            - {type: particle, id: VILLAGER_HAPPY, speed: 0.175, amount: 4}
+
+            on-entity:
+            - {type: effect, amplifier: 4, radius: 2, filter: teammates, id: heal}
+            filter: teammates 
+
+
+  gene:
+    name: Джин
+    type: Поддержка
+    rarity: mythic
+
+    skins:
+      default:
+        name: Джин
+        
+        head: {icon: clay-ball, nbt: {brawl: gene}}
+        body: {icon: leather-chestplate, armor-color: 0x_C0285F, text: '&dЖелетка'}
+        legs: {icon: leather-leggings,   armor-color: 0x_533A90, text: '&9Шаровары'}
+        feet: {icon: leather-boots,      armor-color: 0x_C0285F, text: '&dБабуши'}
+
+        speed: 0.17  
+        
+        attack:
+          icon: clay_ball
+          nbt: {brawl: gene_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Дымовая атака'
+
+          cooldown: 2s
+
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_BASEDRUM, volume: 1.7, pitch: 2}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 0.4s, amount: 1, motion: 1.0, scatter: 1}
+            item: {icon: magenta-glazed-terracotta}
+
+            on-expire:
+            - {type: sound, id: BLOCK_NOTE_BASEDRUM, volume: 1.7, pitch: 2}
+            - <<: {type: armor-stand, margin: 0.6, lifetime: 0.7s, amount: 5, motion: 1.0, scatter: 30}
+              item: {icon: magenta-glazed-terracotta}
+
+              on-tick:
+              - {type: particle, id: block-crack, speed: 0, data: magenta-glazed-terracotta, amount: 3}
+              - {type: particle, id: SPELL_WITCH, speed: 0.5, amount: 9}
+              - {type: sound, id: BLOCK_LAVA_POP, volume: 0.7, pitch: 1.2}            
+  
+              on-entity:
+              - {type: damage, radius: 0, damage: 8}
+              - {type: particle, id: cloud, speed: 0.5, amount: 5}
+
+            on-tick:
+            - {type: particle, id: block-crack, speed: 0, data: magenta-glazed-terracotta, amount: 3}
+            - {type: particle, id: SPELL_WITCH, speed: 0.5, amount: 9}
+            - {type: sound, id: BLOCK_LAVA_POP, volume: 0.7, pitch: 1.2}            
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 8}
+            - {type: particle, id: cloud, speed: 0.5, amount: 5}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Волшебная рука'
+          sparkles:
+          - {type: sound, id: UI_TOAST_CHALLENGE_COMPLETE, volume: 0.5, pitch: 2}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 1.0s, amount: 5, motion: 1.5, scatter: 30}
+            item: {icon: magenta-glazed-terracotta}
+
+
+            on-tick:
+            - {type: particle, id: block-crack, speed: 0, data: magenta-glazed-terracotta, amount: 3}
+            - {type: particle, id: SPELL_WITCH, speed: 0.5, amount: 9}
+            - {type: sound, id: BLOCK_LAVA_POP, volume: 0.7, pitch: 1.2}            
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 13}
+            - {type: particle, id: cloud, speed: 0.5, amount: 5}
+
+
+  bo:
+    name: Бо
+    type: Воин
+    rarity: common
+
+    skins:
+      default:
+        name: Бо
+        
+        head: {icon: clay-ball, nbt: {brawl: bo}}
+        body: {icon: leather-chestplate, armor-color: 0x_2CDFAC, text: '&bЖелетка'}
+        legs: {icon: leather-leggings,   armor-color: 0x_5C330C, text: '&7Штаны'}
+        feet: {icon: leather-boots,      armor-color: 0x_866648, text: ''}
+
+        speed: 0.17  
+        
+        attack:
+          icon: clay_ball
+          nbt: {brawl: bo_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Орлиный глаз'
+
+          cooldown: 1.8s
+
+          sparkles:
+          - {type: sound, id: ENTITY_ARROW_SHOOT, volume: 1, pitch: 0.7}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 0.7s, amount: 3, motion: 2.0, scatter: 5, interval: 0.2s}
+            item: {icon: end-rod}
+
+            on-tick:
+            - {type: particle, id: SWEEP_ATTACK, speed: 0, amount: 1}
+            - {type: sound, id: ENTITY_ARROW_SHOOT, volume: 0.3, pitch: 1}
+            - {type: particle, id: FIREWORKS_SPARK, speed: 0, amount: 2}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 6, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Охота на лис'
+          sparkles:
+          - {type: sound, id: ENTITY_ARROW_SHOOT, volume: 1, pitch: 0.7}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 0.7s, amount: 5, motion: 2.5, scatter: 15, interval: 0.1s}
+            item: {icon: end-rod}
+
+            on-tick:
+            - {type: particle, id: SWEEP_ATTACK, speed: 0, amount: 1}
+            - {type: sound, id: ENTITY_ARROW_SHOOT, volume: 0.3, pitch: 1}
+            - {type: particle, id: FIREWORKS_SPARK, speed: 0, amount: 2}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 8, decay-origin: player}
+            - {type: particle, id: cloud, speed: 0}
+
+            on-hit:
+            - {type: particle, id: explosion-large, amount: 1, speed: 0.17}
+            - {type: sound, id: entity-generic-explode, volume: 0.5, pitch: 1}  
+
+            on-wall:
+            - {type: particle, id: explosion-large, amount: 1, speed: 0.17}
+            - {type: sound, id: entity-generic-explode, volume: 0.5, pitch: 1}    
+
+  penny:
+    name: Пенни
+    type: Стрелок
+    rarity: superrare
+
+    skins:
+      default:
+        name: Пенни
+        
+        head: {icon: clay-ball, nbt: {brawl: penny}}
+        body: {icon: leather-chestplate, armor-color: 0x_F4F4F4, text: '&dЖелетка'}
+        legs: {icon: leather-leggings,   armor-color: 0x_3D3B8E, text: '&9Шаровары'}
+        feet: {icon: leather-boots,      armor-color: 0x_403E6A, text: '&9Ботинки'}
+
+
+        speed: 0.17  
+        
+
+        attack:
+          icon: clay_ball
+          nbt: {brawl: penny_weapeon}
+          text: '¨ff3333Обычная Атака &f⊞¨c9c0bb Мушкетон'
+
+          cooldown: 1s
+
+          sparkles:
+          - {type: sound, id: ENTITY_GENERIC_EXPLODE, volume: 1.7, pitch: 2}
+          - <<: {type: armor-stand, margin: 0.8, lifetime: 1.5s, amount: 1, motion: 2, scatter: 1}
+            item: {icon: concrete, data: 3}
+
+
+            on-tick:
+            - {type: particle, id: block-crack, speed: 0.5, data: "concrete:4", amount: 4}
+            - {type: particle, id: block-crack, speed: 0, data: "concrete:3", amount: 6}
+            - {type: particle, id: block-crack, speed: 0, data: "stained-glass-pane:3", amount: 6}
+            - {type: sound, id: BLOCK_LAVA_POP, volume: 0.7, pitch: 1.2}  
+            - {type: sound, id: ENTITY_ARROW_SHOOT, volume: 0.3, pitch: 1}          
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 7, decay-origin: player}
+            - {type: particle, id: block-crack, speed: 1, data: "concrete:4", amount: 10}
+
+        gadget:
+          icon: gadget air
+          sparkles: []
+
+        super:
+          icon: diamond_barding
+          text: '¨ffa500Супер Атака &f⊞¨c9c0bb Старый пройдоха'
+          sparkles:
+          - {type: sound, id: BLOCK_NOTE_HAT, pitch: 2.0}
+          - <<: {type: armor-stand, margin: 0.6, lifetime: 0.4s, amount: 12, motion: 1.5, scatter: 180, interval: 0.05s}
+            item: {icon: air}
+
+            on-tick:
+            - {type: particle, id: SWEEP_ATTACK, speed: 0, amount: 4}
+            - {type: sound, id: BLOCK_LAVA_POP, volume: 0.7, pitch: 1.2}
+            - {type: sound, id: ENTITY_GENERIC_EXPLODE, volume: 0.3, pitch: 2}
+
+            on-entity:
+            - {type: damage, radius: 0, damage: 8, decay-origin: player}
