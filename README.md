@@ -1,1 +1,1 @@
-#Конфигурация BrawlStars
+# Конфигурация BrawlStars
